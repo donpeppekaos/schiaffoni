@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gift Card — Schiaffoni</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="wordmark">Schiaffoni<span>.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="const n=document.getElementById('main-nav'); const open=n.classList.toggle('open'); this.setAttribute('aria-expanded', open);">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="storia.html">La nostra storia</a>
+      <a href="menu.html">Menu</a>
+      <a href="giftcard.html" aria-current="page">Gift Card</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="prenota.html" class="nav-cta">Prenota</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" style="padding-bottom: var(--space-3);">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">Gift Card</span>
+      <h1>Regala una sera da Schiaffoni.</h1>
+      <p class="hero-lede">Una gift card valida per una cena al ristorante, dell'importo che preferisci. Ideale per un compleanno, un anniversario, o semplicemente per chi ami.</p>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <div class="container">
+      <div class="giftcard-tiers">
+        <div class="tier">
+          <span class="eyebrow">Assaggio</span>
+          <span class="amount">€60</span>
+          <p>Un contributo verso una cena per due, apertura compresa.</p>
+        </div>
+        <div class="tier">
+          <span class="eyebrow">Percorso</span>
+          <span class="amount">€120</span>
+          <p>Copre gran parte di una cena completa per due persone.</p>
+        </div>
+        <div class="tier">
+          <span class="eyebrow">Serata intera</span>
+          <span class="amount">€200</span>
+          <p>Una cena completa con vino in abbinamento, senza pensieri.</p>
+        </div>
+      </div>
+
+      <div class="note-box">
+        L'acquisto online delle gift card sarà attivo a breve. Nel frattempo, puoi richiederne una scrivendoci dalla pagina <a href="contatti.html" style="color: var(--gold);">Contatti</a>: te la prepariamo noi, anche in formato regalo.
+      </div>
+
+      <div class="hero-actions" style="margin-top: var(--space-4);">
+        <a href="contatti.html" class="btn btn-primary">Richiedi una gift card</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <svg class="ridge-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true" style="margin-bottom: 2rem;">
+      <path d="M0 10 Q 12.5 0, 25 10 T 50 10 T 75 10 T 100 10 T 125 10 T 150 10 T 175 10 T 200 10 T 225 10 T 250 10 T 275 10 T 300 10 T 325 10 T 350 10 T 375 10 T 400 10" fill="none" stroke="currentColor" stroke-width="1"/>
+    </svg>
+    <div class="footer-row">
+      <span>© 2026 Schiaffoni</span>
+      <span><a href="contatti.html">Contatti</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

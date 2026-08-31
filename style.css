@@ -1,0 +1,494 @@
+/* ==========================================================================
+   SCHIAFFONI — design tokens
+   Palette: cucina a legna, semola, vino bruciato, un filo d'oro
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --ink: #1c1815;
+  --ink-soft: #26211c;
+  --ink-line: #3a332c;
+  --semola: #ede3d3;
+  --semola-dim: #b8ac9a;
+  --wine: #8a3324;
+  --wine-bright: #a8402d;
+  --gold: #c9a227;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Newsreader', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.75rem;
+  --space-4: 3rem;
+  --space-5: 5rem;
+  --space-6: 8rem;
+
+  --max-width: 1180px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--semola);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.08;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2.6rem, 6vw, 5.2rem); font-weight: 400; }
+h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+a { color: inherit; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 1.6em;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+/* ---------- Header / Nav ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(28, 24, 21, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--semola);
+}
+
+.wordmark span { color: var(--gold); }
+
+.main-nav { display: flex; gap: var(--space-4); }
+
+.main-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--semola-dim);
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--semola); }
+
+.main-nav a[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.nav-cta {
+  border: 1px solid var(--gold);
+  padding: 0.5em 1.2em;
+  border-radius: 2px;
+  color: var(--gold) !important;
+}
+.nav-cta:hover { background: var(--gold); color: var(--ink) !important; }
+
+.nav-toggle { display: none; }
+
+@media (max-width: 760px) {
+  .main-nav {
+    position: fixed;
+    inset: 64px 0 0 0;
+    background: var(--ink);
+    flex-direction: column;
+    padding: var(--space-4) var(--space-3);
+    gap: var(--space-3);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .main-nav.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .main-nav a { font-size: 1rem; }
+  .nav-toggle {
+    display: block;
+    background: none;
+    border: 1px solid var(--ink-line);
+    color: var(--semola);
+    width: 40px; height: 40px;
+    border-radius: 2px;
+    font-size: 1.1rem;
+  }
+}
+
+/* ---------- Ridge motif (the "schiaffoni" signature) ---------- */
+
+.ridge-divider {
+  width: 100%;
+  height: 28px;
+  display: block;
+  color: var(--ink-line);
+}
+
+.ridge-divider.gold { color: var(--gold); opacity: 0.55; }
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  padding: var(--space-6) 0 var(--space-5);
+  overflow: hidden;
+}
+
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(237,227,211,0.05) 1px, transparent 0);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+.hero .container { position: relative; }
+
+.hero h1 { max-width: 14ch; }
+
+.hero-lede {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--semola-dim);
+  max-width: 42ch;
+  margin-top: var(--space-3);
+}
+
+.hero-meta {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--semola-dim);
+  letter-spacing: 0.04em;
+}
+
+.hero-meta strong { display: block; color: var(--semola); font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2em; }
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.95em 1.8em;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary { background: var(--wine); color: var(--semola); border-color: var(--wine); }
+.btn-primary:hover { background: var(--wine-bright); border-color: var(--wine-bright); }
+
+.btn-outline { border-color: var(--ink-line); color: var(--semola); }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-actions { display: flex; gap: var(--space-2); margin-top: var(--space-4); flex-wrap: wrap; }
+
+/* ---------- Sections ---------- */
+
+section { padding: var(--space-5) 0; }
+
+.section-head { max-width: 56ch; margin-bottom: var(--space-4); }
+.section-head h2 { margin-top: var(--space-1); }
+
+/* Placeholder plates — CSS-only, no real photography yet */
+.plate {
+  aspect-ratio: 4/5;
+  border-radius: 2px;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(201,162,39,0.14), transparent 60%),
+    linear-gradient(160deg, var(--ink-soft), var(--ink));
+  border: 1px solid var(--ink-line);
+  position: relative;
+  overflow: hidden;
+}
+
+.plate::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: var(--space-2);
+  left: var(--space-2);
+  right: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--semola-dim);
+}
+
+.plate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+@media (max-width: 760px) {
+  .plate-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Story / two-column ---------- */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+@media (max-width: 820px) {
+  .split { grid-template-columns: 1fr; gap: var(--space-4); }
+}
+
+.split.reverse .split-media { order: 2; }
+
+.pull-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--semola);
+  border-left: 2px solid var(--gold);
+  padding-left: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+/* ---------- Timeline (story milestones) ---------- */
+
+.timeline { border-top: 1px solid var(--ink-line); margin-top: var(--space-4); }
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.timeline-row time {
+  font-family: var(--font-mono);
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Menu narrative ---------- */
+
+.menu-chapter {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--ink-line);
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: var(--space-4);
+}
+
+.menu-chapter:first-of-type { padding-top: 0; }
+.menu-chapter:last-of-type { border-bottom: none; }
+
+.menu-chapter .num {
+  font-family: var(--font-mono);
+  color: var(--semola-dim);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .menu-chapter { grid-template-columns: 1fr; gap: var(--space-1); }
+}
+
+/* ---------- Forms (Prenota) ---------- */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+@media (max-width: 700px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--semola-dim);
+  margin-bottom: 0.5em;
+}
+
+input, select {
+  width: 100%;
+  background: var(--ink-soft);
+  border: 1px solid var(--ink-line);
+  color: var(--semola);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.85em 1em;
+  border-radius: 2px;
+}
+
+input:focus, select:focus, button:focus, a:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.availability-panel {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--ink-line);
+  background: var(--ink-soft);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--semola-dim);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 0.6em;
+  background: var(--semola-dim);
+}
+.status-dot.ok { background: #7a9a6b; }
+.status-dot.full { background: var(--wine-bright); }
+
+.note-box {
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-left: 2px solid var(--gold);
+  background: var(--ink-soft);
+  font-size: 0.92rem;
+  color: var(--semola-dim);
+}
+
+/* ---------- Gift card ---------- */
+
+.giftcard-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+@media (max-width: 760px) { .giftcard-tiers { grid-template-columns: 1fr; } }
+
+.tier {
+  border: 1px solid var(--ink-line);
+  padding: var(--space-3);
+  border-radius: 2px;
+  transition: border-color 0.2s ease;
+}
+.tier:hover { border-color: var(--gold); }
+.tier .amount { font-family: var(--font-display); font-size: 2.2rem; color: var(--semola); display: block; margin: 0.3em 0; }
+
+/* ---------- Contact ---------- */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+@media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr; } }
+
+.contact-list { list-style: none; padding: 0; margin: var(--space-3) 0 0; }
+.contact-list li { padding: var(--space-2) 0; border-bottom: 1px solid var(--ink-line); }
+.contact-list .label { display: block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3em; }
+
+/* ---------- Footer ---------- */
+
+footer.site-footer {
+  border-top: 1px solid var(--ink-line);
+  padding: var(--space-4) 0;
+  margin-top: var(--space-5);
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--semola-dim);
+  letter-spacing: 0.04em;
+}
+
+.footer-row a { text-decoration: none; }
+.footer-row a:hover { color: var(--gold); }

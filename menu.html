@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — Schiaffoni</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="wordmark">Schiaffoni<span>.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="const n=document.getElementById('main-nav'); const open=n.classList.toggle('open'); this.setAttribute('aria-expanded', open);">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="storia.html">La nostra storia</a>
+      <a href="menu.html" aria-current="page">Menu</a>
+      <a href="giftcard.html">Gift Card</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="prenota.html" class="nav-cta">Prenota</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" style="padding-bottom: var(--space-4);">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">Il menu</span>
+      <h1>Non una lista di piatti. Un racconto.</h1>
+      <p class="hero-lede">Il menu cambia con la stagione, quindi non lo fissiamo qui parola per parola. Quello che resta stabile è il modo in cui pensiamo ogni portata — ed è quello che raccontiamo in questa pagina.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+
+      <div class="menu-chapter">
+        <div class="num">01</div>
+        <div>
+          <h3>L'apertura</h3>
+          <p>Si comincia da qualcosa di piccolo e diretto: un solo ingrediente trattato in due o tre modi, pensato per svegliare il palato senza anticipare troppo. È il momento in cui raccontiamo la stagione in corso.</p>
+        </div>
+      </div>
+
+      <div class="menu-chapter">
+        <div class="num">02</div>
+        <div>
+          <h3>Il primo studio</h3>
+          <p>La pasta è il cuore del nostro lavoro, ed è qui che si vede il formato che dà il nome al ristorante. Sfoglie tirate a mano, cotture calcolate al minuto, sughi ridotti per ore prima ancora che il piatto venga pensato.</p>
+        </div>
+      </div>
+
+      <div class="menu-chapter">
+        <div class="num">03</div>
+        <div>
+          <h3>Il secondo studio</h3>
+          <p>Carne o pesce, sempre in base a cosa offre la stagione e il mercato quel giorno. Tecniche di cottura lente, accompagnamenti pensati per bilanciare il piatto principale, mai per riempire lo spazio nel piatto.</p>
+        </div>
+      </div>
+
+      <div class="menu-chapter">
+        <div class="num">04</div>
+        <div>
+          <h3>La chiusura</h3>
+          <p>Un dolce pensato con la stessa logica di sottrazione del resto del menu: pochi elementi, temperature e consistenze studiate, mai un finale scontato.</p>
+        </div>
+      </div>
+
+      <div class="menu-chapter">
+        <div class="num">—</div>
+        <div>
+          <h3>Vini e abbinamenti</h3>
+          <p>Una carta essenziale, costruita insieme al percorso in cucina più che come lista a parte. In sala siamo sempre disponibili a costruire un abbinamento su misura per la serata.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="note-box">
+        Per allergie, intolleranze o esigenze particolari, scrivetecelo al momento della prenotazione: costruiamo il percorso anche intorno a queste indicazioni.
+      </div>
+      <div class="hero-actions" style="margin-top: var(--space-4);">
+        <a href="prenota.html" class="btn btn-primary">Prenota un tavolo</a>
+        <a href="contatti.html" class="btn btn-outline">Contattaci per il menu del giorno</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <svg class="ridge-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true" style="margin-bottom: 2rem;">
+      <path d="M0 10 Q 12.5 0, 25 10 T 50 10 T 75 10 T 100 10 T 125 10 T 150 10 T 175 10 T 200 10 T 225 10 T 250 10 T 275 10 T 300 10 T 325 10 T 350 10 T 375 10 T 400 10" fill="none" stroke="currentColor" stroke-width="1"/>
+    </svg>
+    <div class="footer-row">
+      <span>© 2026 Schiaffoni</span>
+      <span><a href="contatti.html">Contatti</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

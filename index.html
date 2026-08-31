@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schiaffoni — Ristorante</title>
+<meta name="description" content="Schiaffoni: cucina di studio, pasta fatta a mano, una tavola a Roma.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="wordmark">Schiaffoni<span>.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="const n=document.getElementById('main-nav'); const open=n.classList.toggle('open'); this.setAttribute('aria-expanded', open);">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="storia.html">La nostra storia</a>
+      <a href="menu.html">Menu</a>
+      <a href="giftcard.html">Gift Card</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="prenota.html" class="nav-cta">Prenota</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">Cucina di studio · Roma</span>
+      <h1>Una tavola che nasce dalla forma della pasta.</h1>
+      <p class="hero-lede">Schiaffoni prende il nome da un formato di pasta ruvido e capiente — fatto per accogliere, trattenere, portare peso. È lo stesso principio con cui pensiamo ogni piatto.</p>
+      <div class="hero-actions">
+        <a href="prenota.html" class="btn btn-primary">Prenota un tavolo</a>
+        <a href="storia.html" class="btn btn-outline">Scopri la nostra storia</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>Cena</strong>19:30 — 23:00</div>
+        <div><strong>Chiuso</strong>Lunedì</div>
+        <div><strong>Dove</strong>Roma, Italia</div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="ridge-divider gold" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 10 Q 12.5 0, 25 10 T 50 10 T 75 10 T 100 10 T 125 10 T 150 10 T 175 10 T 200 10 T 225 10 T 250 10 T 275 10 T 300 10 T 325 10 T 350 10 T 375 10 T 400 10" fill="none" stroke="currentColor" stroke-width="1.2"/>
+  </svg>
+
+  <section>
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="eyebrow">Filosofia</span>
+          <h2>Poche portate, studiate a lungo.</h2>
+          <p class="pull-quote">"Non inseguiamo la lista dei piatti più lunga. Inseguiamo quella più vera."</p>
+          <p>Ogni menu nasce da una stagione, una materia prima, un ricordo. Il nostro lavoro è togliere, non aggiungere — fino a quando resta solo l'essenziale, servito con cura.</p>
+          <a href="menu.html" class="btn btn-outline" style="margin-top: 1.5rem;">Leggi il racconto del menu</a>
+        </div>
+        <div class="split-media">
+          <div class="plate" data-label="Studio 01 — impasto"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">In cucina</span>
+        <h2>Tre gesti che ci rappresentano</h2>
+      </div>
+      <div class="plate-grid">
+        <div class="plate" data-label="La sfoglia, tirata a mano"></div>
+        <div class="plate" data-label="Il fondo, ridotto per ore"></div>
+        <div class="plate" data-label="Il piatto, finito in sala"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="split reverse">
+        <div class="split-media">
+          <div class="plate" data-label="La sala — 24 coperti"></div>
+        </div>
+        <div>
+          <span class="eyebrow">La sala</span>
+          <h2>Un solo servizio, ogni sera.</h2>
+          <p>Ventiquattro coperti, luce bassa, un solo giro di cena. Preferiamo dare tempo a chi si siede piuttosto che moltiplicare i tavoli. È anche per questo che le prenotazioni sono gestite direttamente da noi.</p>
+          <a href="prenota.html" class="btn btn-primary" style="margin-top: 1.5rem;">Verifica la disponibilità</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <svg class="ridge-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true" style="margin-bottom: 2rem;">
+      <path d="M0 10 Q 12.5 0, 25 10 T 50 10 T 75 10 T 100 10 T 125 10 T 150 10 T 175 10 T 200 10 T 225 10 T 250 10 T 275 10 T 300 10 T 325 10 T 350 10 T 375 10 T 400 10" fill="none" stroke="currentColor" stroke-width="1"/>
+    </svg>
+    <div class="footer-row">
+      <span>© 2026 Schiaffoni</span>
+      <span><a href="contatti.html">Contatti</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

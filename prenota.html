@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prenota — Schiaffoni</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="wordmark">Schiaffoni<span>.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="const n=document.getElementById('main-nav'); const open=n.classList.toggle('open'); this.setAttribute('aria-expanded', open);">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="storia.html">La nostra storia</a>
+      <a href="menu.html">Menu</a>
+      <a href="giftcard.html">Gift Card</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="prenota.html" class="nav-cta" aria-current="page">Prenota</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" style="padding-bottom: var(--space-3);">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">Prenota un tavolo</span>
+      <h1>Un solo servizio a sera. Verifica la disponibilità.</h1>
+      <p class="hero-lede">Scegli data, orario e numero di ospiti: ti mostriamo subito se c'è posto.</p>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <div class="container" style="max-width: 760px;">
+
+      <form id="booking-form">
+        <div class="form-grid">
+          <div>
+            <label for="data">Data</label>
+            <input type="date" id="data" name="data" required>
+          </div>
+          <div>
+            <label for="orario">Orario</label>
+            <select id="orario" name="orario" required>
+              <option value="">Seleziona</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+              <option value="21:00">21:00</option>
+              <option value="21:30">21:30</option>
+            </select>
+          </div>
+          <div>
+            <label for="ospiti">Ospiti</label>
+            <select id="ospiti" name="ospiti" required>
+              <option value="">Seleziona</option>
+              <option value="1">1 persona</option>
+              <option value="2">2 persone</option>
+              <option value="3">3 persone</option>
+              <option value="4">4 persone</option>
+              <option value="5">5 persone</option>
+              <option value="6">6 persone</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--space-2);">
+          <button type="submit" class="btn btn-primary">Verifica disponibilità</button>
+        </div>
+      </form>
+
+      <div id="availability" class="availability-panel" hidden>
+        <span class="status-dot" id="status-dot"></span>
+        <span id="status-text"></span>
+      </div>
+
+      <div id="contact-fields" hidden style="margin-top: var(--space-3);">
+        <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+          <div>
+            <label for="nome">Nome e cognome</label>
+            <input type="text" id="nome" name="nome" placeholder="Es. Maria Rossi">
+          </div>
+          <div>
+            <label for="telefono">Telefono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Es. 333 1234567">
+          </div>
+        </div>
+        <div style="margin-top: var(--space-2);">
+          <label for="note">Note (allergie, occasioni speciali...)</label>
+          <input type="text" id="note" name="note" placeholder="Facoltativo">
+        </div>
+        <div style="margin-top: var(--space-3);">
+          <button type="button" id="confirm-btn" class="btn btn-primary">Conferma prenotazione</button>
+        </div>
+      </div>
+
+      <div class="note-box">
+        Questa pagina mostra come funzionerà la prenotazione online. Il collegamento al sistema che verifica la disponibilità reale e salva le prenotazioni verrà attivato nel prossimo passaggio (configurazione del database). Per ora, in caso di necessità, potete contattarci direttamente dalla pagina <a href="contatti.html" style="color: var(--gold);">Contatti</a>.
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <svg class="ridge-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true" style="margin-bottom: 2rem;">
+      <path d="M0 10 Q 12.5 0, 25 10 T 50 10 T 75 10 T 100 10 T 125 10 T 150 10 T 175 10 T 200 10 T 225 10 T 250 10 T 275 10 T 300 10 T 325 10 T 350 10 T 375 10 T 400 10" fill="none" stroke="currentColor" stroke-width="1"/>
+    </svg>
+    <div class="footer-row">
+      <span>© 2026 Schiaffoni</span>
+      <span><a href="contatti.html">Contatti</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Placeholder logic — sarà sostituita dalla verifica reale su database
+  // quando colleghiamo il backend (prossimo passaggio del progetto).
+  const form = document.getElementById('booking-form');
+  const panel = document.getElementById('availability');
+  const dot = document.getElementById('status-dot');
+  const text = document.getElementById('status-text');
+  const contactFields = document.getElementById('contact-fields');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const data = document.getElementById('data').value;
+    const orario = document.getElementById('orario').value;
+    const ospiti = document.getElementById('ospiti').value;
+
+    if (!data || !orario || !ospiti) return;
+
+    panel.hidden = false;
+    // Placeholder: alterna disponibile/non disponibile per mostrare l'interfaccia.
+    const disponibile = true;
+
+    if (disponibile) {
+      dot.className = 'status-dot ok';
+      text.textContent = `Tavolo disponibile per ${ospiti} persone il ${data} alle ${orario}.`;
+      contactFields.hidden = false;
+    } else {
+      dot.className = 'status-dot full';
+      text.textContent = `Siamo al completo per ${ospiti} persone il ${data} alle ${orario}. Prova un altro orario.`;
+      contactFields.hidden = true;
+    }
+  });
+
+  document.getElementById('confirm-btn').addEventListener('click', function () {
+    alert('Nella versione finale, questa azione salverà la prenotazione nel gestionale.');
+  });
+</script>
+
+</body>
+</html>

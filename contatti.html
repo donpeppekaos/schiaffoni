@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contatti — Schiaffoni</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="wordmark">Schiaffoni<span>.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="const n=document.getElementById('main-nav'); const open=n.classList.toggle('open'); this.setAttribute('aria-expanded', open);">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="storia.html">La nostra storia</a>
+      <a href="menu.html">Menu</a>
+      <a href="giftcard.html">Gift Card</a>
+      <a href="contatti.html" aria-current="page">Contatti</a>
+      <a href="prenota.html" class="nav-cta">Prenota</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" style="padding-bottom: var(--space-3);">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">Contatti</span>
+      <h1>Scrivici, o vieni a trovarci.</h1>
+      <p class="hero-lede">Per richieste particolari, gift card o gruppi numerosi, il modo più semplice è contattarci direttamente.</p>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow">Dove e quando</span>
+          <ul class="contact-list">
+            <li>
+              <span class="label">Indirizzo</span>
+              Da inserire — indirizzo del ristorante
+            </li>
+            <li>
+              <span class="label">Telefono</span>
+              Da inserire — numero di telefono
+            </li>
+            <li>
+              <span class="label">Email</span>
+              Da inserire — indirizzo email
+            </li>
+            <li>
+              <span class="label">Orari</span>
+              Cena 19:30 — 23:00 · Chiuso il lunedì
+            </li>
+          </ul>
+        </div>
+        <div>
+          <span class="eyebrow">Scrivici</span>
+          <form>
+            <div style="margin-top: var(--space-2);">
+              <label for="c-nome">Nome</label>
+              <input type="text" id="c-nome" name="nome" placeholder="Il tuo nome">
+            </div>
+            <div style="margin-top: var(--space-2);">
+              <label for="c-email">Email</label>
+              <input type="email" id="c-email" name="email" placeholder="La tua email">
+            </div>
+            <div style="margin-top: var(--space-2);">
+              <label for="c-messaggio">Messaggio</label>
+              <input type="text" id="c-messaggio" name="messaggio" placeholder="Come possiamo aiutarti?">
+            </div>
+            <div style="margin-top: var(--space-3);">
+              <button type="submit" class="btn btn-primary">Invia messaggio</button>
+            </div>
+          </form>
+          <div class="note-box">
+            L'invio del form sarà attivo a breve. Nel frattempo, contattaci pure ai riferimenti qui accanto.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <svg class="ridge-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true" style="margin-bottom: 2rem;">
+      <path d="M0 10 Q 12.5 0, 25 10 T 50 10 T 75 10 T 100 10 T 125 10 T 150 10 T 175 10 T 200 10 T 225 10 T 250 10 T 275 10 T 300 10 T 325 10 T 350 10 T 375 10 T 400 10" fill="none" stroke="currentColor" stroke-width="1"/>
+    </svg>
+    <div class="footer-row">
+      <span>© 2026 Schiaffoni</span>
+      <span><a href="contatti.html">Contatti</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
