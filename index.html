@@ -27,10 +27,11 @@
     color: var(--green);
     font-family: 'IBM Plex Mono', monospace;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     position: relative;
-    background: var(--green); /* fallback se il video non carica */
+    background: var(--paper); /* fallback sempre avorio, mai verde */
   }
 
   /* ---------- Video di sfondo ---------- */
@@ -38,8 +39,11 @@
   .bg-video-wrap {
     position: fixed;
     inset: 0;
+    height: 100vh;
+    height: 100dvh;
     z-index: -2;
     overflow: hidden;
+    background: var(--paper);
   }
 
   .bg-video-wrap video {
@@ -52,13 +56,14 @@
   .bg-wash {
     position: fixed;
     inset: 0;
+    height: 100vh;
+    height: 100dvh;
     z-index: -1;
     background: rgba(250, 249, 246, 0.62);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .bg-video-wrap video { display: none; }
-    .bg-video-wrap { background: var(--paper); }
   }
 
   /* ---------- Banner ---------- */
@@ -98,7 +103,7 @@
     font-size: 0.7rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, background-color 0.2s ease;
     white-space: nowrap;
   }
 
@@ -127,7 +132,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1.8rem;
+      gap: 1.4rem;
       transform: translateY(-8px);
       opacity: 0;
       pointer-events: none;
@@ -142,10 +147,18 @@
     nav a {
       font-size: 0.85rem;
       color: var(--paper);
+      padding: 0.6em 1.6em;
+      border-radius: 2px;
+      border: 1px solid rgba(250, 249, 246, 0.35);
     }
-    nav a:hover, nav a:focus-visible {
-      color: var(--paper);
-      opacity: 0.7;
+    /* Al tocco/click o al passaggio del mouse, il "bottone" si inverte: sfondo avorio, testo verde */
+    nav a:hover,
+    nav a:focus-visible,
+    nav a:active {
+      background: var(--paper);
+      color: var(--green);
+      border-color: var(--paper);
+      opacity: 1;
     }
     .nav-toggle { display: block; }
     .nav-toggle.open-state {
