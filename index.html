@@ -61,7 +61,7 @@
     .bg-video-wrap { background: var(--paper); }
   }
 
-  /* ---------- Banner / nav ---------- */
+  /* ---------- Banner ---------- */
 
   header {
     display: flex;
@@ -81,9 +81,15 @@
     display: block;
   }
 
+  /* ---------- Nav (fuori dal banner, cosi' il fixed non viene "contenuto" dal backdrop-filter dell'header) ---------- */
+
   nav {
     display: flex;
     gap: clamp(1rem, 3vw, 2.4rem);
+    position: absolute;
+    top: 1.4rem;
+    right: clamp(1.25rem, 4vw, 3rem);
+    z-index: 10;
   }
 
   nav a {
@@ -115,6 +121,8 @@
     nav {
       position: fixed;
       inset: 68px 0 0 0;
+      top: 68px;
+      right: 0;
       background: var(--green);
       flex-direction: column;
       align-items: center;
@@ -236,21 +244,22 @@
   <header>
     <a href="index.html"><img src="assets/icon.png" alt="Schiaffoni"></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="const n=document.getElementById('main-nav'); const open=n.classList.toggle('open'); this.classList.toggle('open-state', open); this.setAttribute('aria-expanded', open);">☰</button>
-    <nav id="main-nav">
-      <a href="index.html">Home</a>
-      <a href="index.html">La nostra storia</a>
-      <a href="index.html">Menu</a>
-      <a href="index.html">Gift Card</a>
-      <a href="index.html">Contatti</a>
-      <a href="index.html">Prenota</a>
-    </nav>
   </header>
+
+  <nav id="main-nav">
+    <a href="index.html">Home</a>
+    <a href="index.html">La nostra storia</a>
+    <a href="index.html">Menu</a>
+    <a href="index.html">Gift Card</a>
+    <a href="index.html">Contatti</a>
+    <a href="index.html">Prenota</a>
+  </nav>
 
   <main>
     <div class="stage">
       <img class="logo" src="assets/logo.png" alt="Schiaffoni">
       <p class="tagline">Next Opening</p>
-      <p class="location">Roma</p>
+      <p class="location">Via Manzoni, Napoli</p>
     </div>
   </main>
 
