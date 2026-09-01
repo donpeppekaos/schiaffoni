@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Schiaffoni</title>
-<meta name="description" content="Schiaffoni. Apertura in arrivo.">
+<title>Schiaffoni — Next Opening</title>
+<meta name="description" content="Schiaffoni, Roma. Apertura in arrivo.">
 <link rel="icon" type="image/png" href="assets/icon.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -24,12 +24,41 @@
   }
 
   body {
-    background: var(--paper);
     color: var(--green);
     font-family: 'IBM Plex Mono', monospace;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    background: var(--green); /* fallback se il video non carica */
+  }
+
+  /* ---------- Video di sfondo ---------- */
+
+  .bg-video-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+  }
+
+  .bg-video-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bg-wash {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: rgba(250, 249, 246, 0.62);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-video-wrap video { display: none; }
+    .bg-video-wrap { background: var(--paper); }
   }
 
   /* ---------- Banner / nav ---------- */
@@ -40,6 +69,10 @@
     justify-content: space-between;
     padding: 1.4rem clamp(1.25rem, 4vw, 3rem);
     border-bottom: 1px solid var(--line);
+    background: rgba(250, 249, 246, 0.55);
+    backdrop-filter: blur(6px);
+    position: relative;
+    z-index: 10;
   }
 
   header img {
@@ -82,7 +115,7 @@
     nav {
       position: fixed;
       inset: 68px 0 0 0;
-      background: var(--paper);
+      background: var(--green);
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -91,14 +124,27 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 9;
     }
     nav.open {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
     }
-    nav a { font-size: 0.85rem; }
+    nav a {
+      font-size: 0.85rem;
+      color: var(--paper);
+    }
+    nav a:hover, nav a:focus-visible {
+      color: var(--paper);
+      opacity: 0.7;
+    }
     .nav-toggle { display: block; }
+    .nav-toggle.open-state {
+      background: var(--green);
+      color: var(--paper);
+      border-color: var(--green);
+    }
   }
 
   /* ---------- Hero / centro pagina ---------- */
@@ -110,6 +156,8 @@
     justify-content: center;
     padding: 3rem 2rem;
     text-align: center;
+    position: relative;
+    z-index: 1;
   }
 
   .stage { max-width: 90vw; }
@@ -178,9 +226,16 @@
 </head>
 <body>
 
+  <div class="bg-video-wrap">
+    <video autoplay muted loop playsinline poster="assets/video/poster.jpg">
+      <source src="assets/video/hero-bg.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="bg-wash"></div>
+
   <header>
     <a href="index.html"><img src="assets/icon.png" alt="Schiaffoni"></a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="const n=document.getElementById('main-nav'); const open=n.classList.toggle('open'); this.setAttribute('aria-expanded', open);">☰</button>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="const n=document.getElementById('main-nav'); const open=n.classList.toggle('open'); this.classList.toggle('open-state', open); this.setAttribute('aria-expanded', open);">☰</button>
     <nav id="main-nav">
       <a href="index.html">Home</a>
       <a href="index.html">La nostra storia</a>
@@ -194,8 +249,8 @@
   <main>
     <div class="stage">
       <img class="logo" src="assets/logo.png" alt="Schiaffoni">
-      <p class="tagline">NEXT OPENING</p>
-      <p class="location">VIA MANZONI, NAPOLI</p>
+      <p class="tagline">Next Opening</p>
+      <p class="location">Roma</p>
     </div>
   </main>
 
