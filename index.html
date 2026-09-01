@@ -59,7 +59,7 @@
     height: 100vh;
     height: 100dvh;
     z-index: -1;
-    background: rgba(250, 249, 246, 0.62);
+    background: rgba(250, 249, 246, 0.9);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -149,16 +149,14 @@
       color: var(--paper);
       padding: 0.6em 1.6em;
       border-radius: 2px;
-      border: 1px solid rgba(250, 249, 246, 0.35);
+      background: transparent;
     }
-    /* Al tocco/click o al passaggio del mouse, il "bottone" si inverte: sfondo avorio, testo verde */
+    /* Solo al tocco/click il "bottone" si inverte temporaneamente: sfondo avorio, testo verde. Da fermo resta sempre verde/trasparente, senza cornice. */
     nav a:hover,
     nav a:focus-visible,
     nav a:active {
       background: var(--paper);
       color: var(--green);
-      border-color: var(--paper);
-      opacity: 1;
     }
     .nav-toggle { display: block; }
     .nav-toggle.open-state {
@@ -272,7 +270,7 @@
     <div class="stage">
       <img class="logo" src="assets/logo.png" alt="Schiaffoni">
       <p class="tagline">Next Opening</p>
-      <p class="location">Via Manzoni, Napoli</p>
+      <p class="location">Via Manzoni - Napoli</p>
     </div>
   </main>
 
