@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Schiaffoni — Ristorante, Napoli</title>
+<meta name="description" content="Schiaffoni, ristorante a Napoli.">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <a href="#top"><img src="assets/icon.png" alt="Schiaffoni"></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Menu">☰</button>
+</header>
+<nav id="main-nav" aria-label="Principale">
+  <a href="#storia">La nostra storia</a>
+  <a href="#menu">Menu</a>
+  <a href="#giftcard">Gift Card</a>
+  <a href="#contatti">Contatti</a>
+  <a href="#prenota" class="cta">Prenota</a>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <video autoplay muted loop playsinline poster="assets/video/poster.jpg"><source src="assets/video/hero-bg.mp4" type="video/mp4"></video>
+    <div>
+      <img class="logo" src="assets/logo.png" alt="Schiaffoni">
+    </div>
+    <a class="cue" href="#storia" aria-label="Scorri"></a>
+  </section>
+
+  <section id="storia">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">La nostra storia</p>
+        <h2>Da un formato di pasta, un modo di stare a tavola.</h2>
+        <p>Lo schiaffone è largo, ruvido, capace di trattenere un sugo importante. È l’immagine della cucina che vogliamo: accoglie, non teme il peso, non si nasconde dietro la raffinatezza fine a se stessa.</p>
+        <p>Il nome è arrivato prima del menu, prima ancora del locale.</p>
+      </div>
+      <div class="plate rv" data-label="Lo schiaffone"></div>
+    </div>
+  </section>
+
+  <section id="menu" class="alt">
+    <div class="wrap">
+      <div class="rv">
+        <p class="eyebrow">Il menu</p>
+        <h2>Non una lista di piatti. Un racconto.</h2>
+        <p>Cambia con la stagione, quindi lo raccontiamo invece di elencarlo: l’origine dei piatti, lo studio, la cura.</p>
+      </div>
+      <div class="chapter rv"><span class="n">01</span><div><h3>L’apertura</h3><p>Un solo ingrediente, trattato in più modi. Il racconto della stagione in corso.</p></div></div>
+      <div class="chapter rv"><span class="n">02</span><div><h3>Il primo studio</h3><p>La pasta è il cuore del lavoro: sfoglie tirate a mano, cotture al minuto, sughi ridotti per ore.</p></div></div>
+      <div class="chapter rv"><span class="n">03</span><div><h3>Il secondo studio</h3><p>Carne o pesce secondo il mercato del giorno, con cotture lente e accompagnamenti essenziali.</p></div></div>
+      <div class="chapter rv"><span class="n">04</span><div><h3>La chiusura</h3><p>Un dolce pensato per sottrazione: pochi elementi, temperature e consistenze studiate.</p></div></div>
+    </div>
+  </section>
+
+  <section id="giftcard">
+    <div class="wrap split rev">
+      <div class="plate rv" data-label="Gift Card"></div>
+      <div class="rv">
+        <p class="eyebrow">Gift Card</p>
+        <h2>Regala una sera da Schiaffoni.</h2>
+        <p>Non un semplice buono: un invito a sedersi a tavola.</p>
+        <a class="btn" href="#contatti">Richiedila</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="prenota" class="alt">
+    <div class="wrap center rv">
+      <p class="eyebrow">Prenota</p>
+      <h2>Un tavolo ti aspetta.</h2>
+      <p>Per prenotare un tavolo scrivici o chiamaci.</p>
+      <a class="btn solid" href="#contatti">Contattaci</a>
+    </div>
+  </section>
+
+  <section id="contatti">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">Contatti</p>
+        <h2>Vieni a trovarci.</h2>
+      </div>
+      <ul class="contacts rv">
+        <li><span>Indirizzo</span>Via Manzoni - Napoli</li>
+        <li><span>Telefono</span>Da inserire</li>
+        <li><span>Email</span>Da inserire</li>
+        <li><span>Orari</span>Da inserire</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Schiaffoni</span><span>Via Manzoni - Napoli</span></div></footer>
+</body>
+</html>
