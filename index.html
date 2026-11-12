@@ -2,278 +2,100 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Schiaffoni</title>
-<meta name="description" content="Schiaffoni">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Schiaffoni — Ristorante, Napoli</title>
+<meta name="description" content="Schiaffoni, ristorante a Napoli.">
 <link rel="icon" type="image/png" href="assets/icon.png">
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
-
-  :root {
-    --green: #1d5634;
-    --green-soft: #2f5d43;
-    --paper: #faf9f6;
-    --line: #dcd7cc;
-  }
-
-  * { box-sizing: border-box; }
-
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-
-  body {
-    color: var(--green);
-    font-family: 'IBM Plex Mono', monospace;
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background: var(--paper); /* fallback sempre avorio, mai verde */
-  }
-
-  /* ---------- Video di sfondo ---------- */
-
-  .bg-video-wrap {
-    position: fixed;
-    inset: 0;
-    height: 100vh;
-    height: 100dvh;
-    z-index: -2;
-    overflow: hidden;
-    background: var(--paper);
-  }
-
-  .bg-video-wrap video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: grayscale(65%) brightness(1.02) contrast(1.05) saturate(0.7);
-  }
-
-  .bg-wash {
-    position: fixed;
-    inset: 0;
-    height: 100vh;
-    height: 100dvh;
-    z-index: -1;
-    background: rgba(250, 249, 246, 0.32);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .bg-video-wrap video { display: none; }
-  }
-
-  /* ---------- Banner ---------- */
-
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.4rem clamp(1.25rem, 4vw, 3rem);
-    border-bottom: 1px solid var(--line);
-    background: rgba(250, 249, 246, 0.55);
-    backdrop-filter: blur(6px);
-    position: relative;
-    z-index: 10;
-  }
-
-  header img {
-    height: clamp(28px, 4vw, 38px);
-    width: auto;
-    display: block;
-  }
-
-  /* ---------- Nav (fuori dal banner, cosi' il fixed non viene "contenuto" dal backdrop-filter dell'header) ---------- */
-
-  nav {
-    display: flex;
-    gap: clamp(1rem, 3vw, 2.4rem);
-    position: absolute;
-    top: 1.4rem;
-    right: clamp(1.25rem, 4vw, 3rem);
-    z-index: 10;
-  }
-
-  nav a {
-    color: var(--green-soft);
-    text-decoration: none;
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    transition: color 0.2s ease, background-color 0.2s ease;
-    white-space: nowrap;
-  }
-
-  nav a:hover, nav a:focus-visible {
-    color: var(--green);
-  }
-
-  .nav-toggle {
-    display: none;
-    background: none;
-    border: 1px solid var(--line);
-    color: var(--green);
-    width: 38px;
-    height: 38px;
-    border-radius: 2px;
-    font-size: 1rem;
-  }
-
-  @media (max-width: 680px) {
-    nav {
-      position: fixed;
-      inset: 68px 0 0 0;
-      top: 68px;
-      right: 0;
-      background: var(--green);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.4rem;
-      transform: translateY(-8px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      z-index: 9;
-    }
-    nav.open {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-    nav a {
-      font-size: 0.85rem;
-      color: var(--paper);
-      padding: 0.6em 1.6em;
-      border-radius: 2px;
-      background: transparent;
-    }
-    /* Solo al tocco/click il "bottone" si inverte temporaneamente: sfondo avorio, testo verde. Da fermo resta sempre verde/trasparente, senza cornice. */
-    nav a:hover,
-    nav a:focus-visible,
-    nav a:active {
-      background: var(--paper);
-      color: var(--green);
-    }
-    .nav-toggle { display: block; }
-    .nav-toggle.open-state {
-      background: var(--green);
-      color: var(--paper);
-      border-color: var(--green);
-    }
-  }
-
-  /* ---------- Hero / centro pagina ---------- */
-
-  main {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3rem 2rem;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .stage { max-width: 90vw; }
-
-  .logo {
-    width: clamp(220px, 40vw, 480px);
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    opacity: 0;
-    transform: translateY(14px);
-  }
-
-  .tagline {
-    margin-top: 2.1rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--green-soft);
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  .tagline::before,
-  .tagline::after {
-    content: '—';
-    margin: 0 0.8em;
-    opacity: 0.5;
-  }
-
-  .location {
-    margin-top: 1.1rem;
-    font-size: 0.66rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--green-soft);
-    opacity: 0;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .logo {
-      animation: rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-    }
-    .tagline {
-      animation: rise 0.9s ease 0.55s forwards;
-    }
-    .location {
-      animation: fade 0.9s ease 0.8s forwards;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .logo, .tagline, .location { opacity: 1; transform: none; }
-  }
-
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fade {
-    from { opacity: 0; }
-    to { opacity: 0.7; }
-  }
-</style>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
 </head>
 <body>
+<header class="site-header">
+  <a href="#top"><img src="assets/icon.png" alt="Schiaffoni"></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Menu">☰</button>
+</header>
+<nav id="main-nav" aria-label="Principale">
+  <a href="#storia">La nostra storia</a>
+  <a href="#menu">Menu</a>
+  <a href="#giftcard">Gift Card</a>
+  <a href="#contatti">Contatti</a>
+  <a href="#prenota" class="cta">Prenota</a>
+</nav>
 
-  <div class="bg-video-wrap">
-    <video autoplay muted loop playsinline poster="assets/video/poster.jpg">
-      <source src="assets/video/hero-bg.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="bg-wash"></div>
-
-  <header>
-    <a href="index.html"><img src="assets/icon.png" alt="Schiaffoni"></a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="const n=document.getElementById('main-nav'); const open=n.classList.toggle('open'); this.classList.toggle('open-state', open); this.setAttribute('aria-expanded', open);">☰</button>
-  </header>
-
-  <nav id="main-nav">
-    <a href="index.html">Home</a>
-    <a href="index.html">La nostra storia</a>
-    <a href="index.html">Menu</a>
-    <a href="index.html">Gift Card</a>
-    <a href="index.html">Contatti</a>
-    <a href="index.html">Prenota</a>
-  </nav>
-
-  <main>
-    <div class="stage">
+<main id="top">
+  <section class="hero">
+    <video autoplay muted loop playsinline poster="assets/video/poster.jpg"><source src="assets/video/hero-bg.mp4" type="video/mp4"></video>
+    <div>
       <img class="logo" src="assets/logo.png" alt="Schiaffoni">
-      <p class="tagline">Next Opening</p>
-      <p class="location">VIA MANZONI, NAPOLI</p>
     </div>
-  </main>
+    <a class="cue" href="#storia" aria-label="Scorri"></a>
+  </section>
 
+  <section id="storia">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">La nostra storia</p>
+        <h2>Da un formato di pasta, un modo di stare a tavola.</h2>
+        <p>Lo schiaffone è largo, ruvido, capace di trattenere un sugo importante. È l’immagine della cucina che vogliamo: accoglie, non teme il peso, non si nasconde dietro la raffinatezza fine a se stessa.</p>
+        <p>Il nome è arrivato prima del menu, prima ancora del locale.</p>
+      </div>
+      <div class="plate rv" data-label="Lo schiaffone"></div>
+    </div>
+  </section>
+
+  <section id="menu" class="alt">
+    <div class="wrap">
+      <div class="rv">
+        <p class="eyebrow">Il menu</p>
+        <h2>Non una lista di piatti. Un racconto.</h2>
+        <p>Cambia con la stagione, quindi lo raccontiamo invece di elencarlo: l’origine dei piatti, lo studio, la cura.</p>
+      </div>
+      <div class="chapter rv"><span class="n">01</span><div><h3>L’apertura</h3><p>Un solo ingrediente, trattato in più modi. Il racconto della stagione in corso.</p></div></div>
+      <div class="chapter rv"><span class="n">02</span><div><h3>Il primo studio</h3><p>La pasta è il cuore del lavoro: sfoglie tirate a mano, cotture al minuto, sughi ridotti per ore.</p></div></div>
+      <div class="chapter rv"><span class="n">03</span><div><h3>Il secondo studio</h3><p>Carne o pesce secondo il mercato del giorno, con cotture lente e accompagnamenti essenziali.</p></div></div>
+      <div class="chapter rv"><span class="n">04</span><div><h3>La chiusura</h3><p>Un dolce pensato per sottrazione: pochi elementi, temperature e consistenze studiate.</p></div></div>
+    </div>
+  </section>
+
+  <section id="giftcard">
+    <div class="wrap split rev">
+      <div class="plate rv" data-label="Gift Card"></div>
+      <div class="rv">
+        <p class="eyebrow">Gift Card</p>
+        <h2>Regala una sera da Schiaffoni.</h2>
+        <p>Non un semplice buono: un invito a sedersi a tavola.</p>
+        <a class="btn" href="#contatti">Richiedila</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="prenota" class="alt">
+    <div class="wrap center rv">
+      <p class="eyebrow">Prenota</p>
+      <h2>Un tavolo ti aspetta.</h2>
+      <p>Per prenotare un tavolo scrivici o chiamaci.</p>
+      <a class="btn solid" href="#contatti">Contattaci</a>
+    </div>
+  </section>
+
+  <section id="contatti">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">Contatti</p>
+        <h2>Vieni a trovarci.</h2>
+      </div>
+      <ul class="contacts rv">
+        <li><span>Indirizzo</span>Via Manzoni - Napoli</li>
+        <li><span>Telefono</span>Da inserire</li>
+        <li><span>Email</span>Da inserire</li>
+        <li><span>Orari</span>Da inserire</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Schiaffoni</span><span>Via Manzoni - Napoli</span></div></footer>
 </body>
 </html>
