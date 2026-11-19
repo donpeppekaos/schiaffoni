@@ -48,8 +48,6 @@ body[data-tone=dark] .b-g,body.lock .b-g{opacity:0}
 .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:grayscale(65%) brightness(1.02) contrast(1.05) saturate(.7)}
 .hero::after{content:"";position:absolute;inset:0;background:rgba(250,249,246,.4);z-index:-1}
 .hero h1{font-size:clamp(2.5rem,7.4vw,6rem);line-height:1.05;letter-spacing:-.02em;max-width:15ch;margin:0 auto}
-.w{display:inline-block}
-.cue{position:absolute;bottom:1.6rem;left:50%;width:1px;height:44px;background:var(--green);transform-origin:top}
 
 .plate{aspect-ratio:4/5;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 40%,rgba(29,86,52,.1),transparent 62%),var(--ivory2);position:relative}
 .alt .plate{background:radial-gradient(ellipse at 50% 40%,rgba(29,86,52,.1),transparent 62%),var(--ivory)}
@@ -67,10 +65,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 
 .js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1)}
 .js .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:no-preference){
-.w{animation:rise 1s cubic-bezier(.16,1,.3,1) both}
-.w:nth-child(1){animation-delay:.15s}.w:nth-child(2){animation-delay:.27s}.w:nth-child(3){animation-delay:.39s}.w:nth-child(4){animation-delay:.51s}.w:nth-child(5){animation-delay:.63s}.w:nth-child(6){animation-delay:.75s}.w:nth-child(7){animation-delay:.87s}
-.cue{animation:cue 2s ease-in-out infinite}}
 @media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.hero video{display:none}}
 @keyframes rise{from{opacity:0;transform:translateY(.45em)}to{opacity:1;transform:none}}
 @keyframes cue{0%,100%{transform:scaleY(.3);opacity:.4}50%{transform:scaleY(1);opacity:1}}
@@ -84,3 +78,39 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 #main-nav a::after{display:none}
 #main-nav a:hover,#main-nav a:focus-visible,#main-nav a:active,#main-nav a.cta:hover{background:var(--ivory);color:var(--green)}
 .chapter{grid-template-columns:3rem 1fr}}
+
+/* ---- v3: pagine separate, animazioni ---- */
+main{animation:pagein .7s ease both}
+@keyframes pagein{from{opacity:0}to{opacity:1}}
+#main-nav a[aria-current=page]::after{transform:scaleX(1)}
+.wd{display:inline-block;white-space:nowrap}
+.ch{display:inline-block}
+.hero video{transform:scale(calc(1.06 + var(--p,0)*.12)) translateY(calc(var(--p,0)*6%));will-change:transform}
+.hero h1{opacity:calc(1 - var(--p,0)*1.3);transform:translateY(calc(var(--p,0)*-40px))}
+@media (prefers-reduced-motion:no-preference){
+.js [data-split] .ch{animation:chin 1s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i)*38ms + .25s)}
+.mq-t{animation:mq 30s linear infinite}
+.tile::before{transition:transform .5s cubic-bezier(.16,1,.3,1)}}
+@keyframes chin{from{opacity:0;transform:translateY(.7em) rotate(5deg)}to{opacity:1;transform:none}}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq{padding:1.4rem 0;overflow:hidden;white-space:nowrap}
+.mq-t{display:inline-flex;font:clamp(1.8rem,5vw,3.4rem) var(--didot)}
+.mq-t span{padding-right:.6em}
+.st{font:400 clamp(1.8rem,4.6vw,3.4rem)/1.2 var(--didot);max-width:22ch;margin:0}
+.js .rw{opacity:.18;transition:opacity .5s}
+.js .rw.on{opacity:1}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.tile{position:relative;overflow:hidden;background:var(--ivory);display:flex;flex-direction:column;justify-content:space-between;gap:3rem;min-height:260px;padding:clamp(1.8rem,4vw,3rem);text-decoration:none;transition:color .4s}
+.tile::before{content:"";position:absolute;inset:0;background:var(--green);transform:translateY(101%)}
+.tile:hover::before,.tile:focus-visible::before{transform:none}
+.tile:hover,.tile:focus-visible{color:var(--ivory)}
+.tile>*{position:relative}
+.tile h3{font-size:2rem;margin:0}
+.tile .arr{font-size:1.6rem;transition:transform .4s}
+.tile:hover .arr{transform:translateX(.4rem)}
+.ph{padding:calc(var(--hh) + clamp(3rem,8vw,6rem)) 0 clamp(2rem,5vw,3.5rem)}
+.ph h1{font-size:clamp(2.6rem,8vw,6.5rem);line-height:1;letter-spacing:-.02em;margin:.2em 0 .3em}
+.ph .lead{max-width:48ch;font-size:1.15rem;margin:0}
+.addr{font:clamp(1.8rem,4vw,3rem)/1.15 var(--didot);margin:0}
+.note{max-width:52ch;opacity:.8;margin:2rem 0 0}
+@media (max-width:760px){.tiles{grid-template-columns:1fr}.tile{min-height:180px}}
