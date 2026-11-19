@@ -39,7 +39,8 @@
 
   const h = d.querySelector('.site-header'), t = d.querySelector('.nav-toggle'), n = d.getElementById('main-nav');
   const secs = [...d.querySelectorAll('main > section, footer')];
-  const hero = d.querySelector('.hero');
+  const hero = d.querySelector('.hero, .ph');
+  const pxs = [...d.querySelectorAll('.px')];
   const st = d.querySelector('[data-words]');
   const rws = [...d.querySelectorAll('.rw')];
   if (reduce) rws.forEach(w => w.classList.add('on'));
@@ -54,6 +55,13 @@
     }
     if (d.body.dataset.tone !== tone) d.body.dataset.tone = tone;
     if (hero && !reduce) hero.style.setProperty('--p', Math.min(window.scrollY / vh, 1).toFixed(3));
+    if (!reduce) pxs.forEach(e => {
+      const r = e.getBoundingClientRect();
+      if (r.bottom < -300 || r.top > vh + 300) return;
+      const base = r.top + r.height / 2 - (e._py || 0);
+      e._py = (base - vh / 2) * -parseFloat(e.dataset.speed);
+      e.style.setProperty('--py', e._py.toFixed(1));
+    });
     if (st && !reduce) {
       const r = st.getBoundingClientRect();
       const p = Math.min(Math.max((vh * 0.85 - r.top) / (r.height + vh * 0.35), 0), 1);
