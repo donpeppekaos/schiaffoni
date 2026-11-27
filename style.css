@@ -294,3 +294,38 @@ button.btn{background:transparent;color:inherit;cursor:pointer}
 .hero{background:#1a5030}
 .hero video{opacity:1;filter:none;mix-blend-mode:normal}
 .hero::after{background:radial-gradient(ellipse at 50% 120%,rgba(233,203,196,.18),transparent 60%),linear-gradient(rgba(20,62,38,.28),rgba(20,62,38,.38))}
+
+/* v12 menu: apertura rosa, bande alternate foto/testo a colori vivi */
+:root{--rose2:#f2b4a9;--gv:#2c7a4b}
+.rs2{background:var(--rose2);color:var(--green)}
+.ph.rs2{min-height:78svh}
+.ph.rs2 .eyebrow{color:var(--green)}
+.mb{display:grid;grid-template-columns:1fr 1fr;min-height:84vh;min-height:84svh;padding:0;position:relative;overflow:hidden}
+.mb.nop{grid-template-columns:1fr}
+.mb-p{position:relative;min-height:100%}
+.mb-p .shot{position:absolute;inset:0;border:0;height:100%}
+.mb.flip .mb-p{order:2}
+.mb-t{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:1rem;padding:clamp(3rem,7vw,6rem) clamp(1.8rem,6vw,6rem)}
+.mb.nop .mb-t{max-width:760px;margin:0 auto;align-items:center;text-align:center}
+.mb-t h2{font:400 clamp(2.4rem,5vw,4.6rem)/1.02 var(--didot);letter-spacing:-.015em;margin:0}
+.mb-t p{max-width:34ch;margin:0}
+.mb-t .eyebrow{margin:0}
+.mb-t .ghost{position:absolute;right:clamp(1rem,4vw,3rem);top:.4rem;font:400 clamp(6rem,14vw,12rem)/1 var(--didot);opacity:.18;pointer-events:none}
+.mb.nop .mb-t .ghost{right:auto;left:50%;transform:translateX(-50%)}
+.c-r{background:var(--rose2);color:var(--green)}
+.c-r2{background:#f7d4cb;color:var(--green)}
+.c-i{background:var(--ivory);color:var(--green)}
+.c-g{background:var(--green);color:var(--ivory)}
+.c-g2{background:var(--gv);color:var(--ivory)}
+.c-g .eyebrow,.c-g2 .eyebrow{color:var(--rose)}
+.mcta{text-align:center}
+.mcta .wrap{display:flex;flex-direction:column;align-items:center;gap:1.4rem}
+.mcta h2{font:400 clamp(2.4rem,6vw,5rem)/1.05 var(--didot);margin:0}
+.mcta .note{margin:0}
+.mcta .eyebrow{margin:0}
+@media (max-width:760px){
+.mb{grid-template-columns:1fr;min-height:0}
+.mb-p{min-height:0;aspect-ratio:4/3}
+.mb.flip .mb-p{order:0}
+.mb-t{padding:2.5rem 1.5rem 3.5rem}
+}
