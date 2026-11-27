@@ -370,3 +370,14 @@ button.btn{background:transparent;color:inherit;cursor:pointer}
 .js.go .hero [data-split] .ch{animation-play-state:running}
 @keyframes heroin{from{opacity:0;transform:translate3d(0,.4em,0) scale(.98)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.js .hero [data-split] .ch{animation:none}}
+
+/* v18 hero veloce e pulito: due righe che si dissolvono con le lettere che si "chiudono" */
+.js .hero [data-split] .ch{animation:none}
+.js .hero [data-split] .ln{animation:linein 1s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--ln,0)*.45s + .1s);animation-play-state:paused}
+.js.go .hero [data-split] .ln{animation-play-state:running}
+.hero [data-split] .ln:nth-child(1){--ln:0}
+.hero [data-split] .ln:nth-child(2){--ln:1}
+@keyframes linein{from{opacity:0;letter-spacing:.14em;transform:translate3d(0,.2em,0)}to{opacity:1;letter-spacing:-.02em;transform:none}}
+.hero [data-split] .ln+.ln{letter-spacing:0}
+@media (prefers-reduced-motion:reduce){.js .hero [data-split] .ln{animation:none}}
+.hero h1{font-size:clamp(3rem,8vw,6.2rem)}
