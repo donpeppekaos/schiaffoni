@@ -273,3 +273,21 @@ button.btn{background:transparent;color:inherit;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.hero::before{animation:none}}
 .hero video{mix-blend-mode:normal;opacity:.22}
 .hero::before{opacity:.8;height:55%}
+
+/* v10 foto a tutto schermo: titolo + Prenota sopra la foto; onde vere sotto un velo verde */
+.slide{display:block}
+.slide .shot{position:absolute;inset:0;height:100%}
+.slide .shot::before{background:linear-gradient(to top,rgba(20,60,36,.72),rgba(20,60,36,.05) 55%)}
+.slide .shot::after{color:var(--ivory)}
+.s-over{position:absolute;left:clamp(1.5rem,6vw,5rem);right:clamp(1.5rem,6vw,5rem);bottom:clamp(4.5rem,9vh,6rem);z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem;color:var(--ivory);opacity:calc(clamp(0,(var(--r) - .35) * 1.8,1) * (1 - var(--c) * 1.4));transform:translateY(calc((1 - var(--r)) * 40px - var(--c) * 30px))}
+.s-over .eyebrow{color:var(--rose);margin:0}
+.s-t{margin:0;font:400 clamp(2.6rem,7vw,6rem)/1 var(--didot);letter-spacing:-.015em;color:var(--ivory)}
+.btn.ivb{background:var(--ivory);color:var(--green);border-color:var(--ivory)}
+.btn.ivb:hover{background:var(--rose);border-color:var(--rose)}
+.s-ctrl{color:var(--ivory);left:clamp(1.5rem,6vw,5rem);right:clamp(1.5rem,6vw,5rem);bottom:1.6rem;justify-content:space-between}
+.s-dots button{background:rgba(250,249,246,.4)}.s-dots button.on{background:var(--ivory)}
+.hero video{opacity:.6;filter:grayscale(100%) contrast(1.2) brightness(1.1)}
+.hero::after{background:radial-gradient(ellipse at 50% 120%,rgba(233,203,196,.28),transparent 60%),linear-gradient(rgba(29,86,52,.62),rgba(24,70,43,.74))}
+.hero::before{display:none}
+.hero video{opacity:1;filter:grayscale(100%) contrast(1.35) brightness(.85)}
+.hero::after{background:radial-gradient(ellipse at 50% 120%,rgba(233,203,196,.25),transparent 60%),linear-gradient(rgba(29,86,52,.74),rgba(26,76,46,.82))}

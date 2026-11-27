@@ -106,6 +106,7 @@
   const rws = [...d.querySelectorAll('.rw')];
   if (reduce) rws.forEach(w => w.classList.add('on'));
 
+  let stackApply = () => {};
   const update = () => {
     const hh = h.offsetHeight, vh = window.innerHeight;
     h.classList.toggle('scrolled', window.scrollY > 40);
@@ -128,6 +129,7 @@
       const k = Math.round(p * rws.length);
       rws.forEach((w, i) => w.classList.toggle('on', i < k));
     }
+    stackApply();
   };
   let tick = false;
   const onScroll = () => {
@@ -160,30 +162,38 @@
     watch.forEach((_, k) => io.observe(k));
   } else els.forEach(e => e.classList.add('in'));
 
-  /* slide scorrevoli: dito, trackpad, mouse (trascinando) e frecce */
-  const track = d.querySelector('.track');
-  if (track) {
-    const slides = [...track.children], cnt = d.querySelector('.s-count');
+  /* foto impilate: la sezione resta ferma e scorrendo (dito o trackpad) cambiano le foto; finite, la pagina riprende */
+  const stack = d.querySelector('.stack');
+  if (stack) {
+    const slides = [...stack.querySelectorAll('.slide')], N = slides.length;
+    const cnt = d.querySelector('.s-count'), dots = [...stack.querySelectorAll('.s-dots button')];
     const two = n => String(n).padStart(2, '0');
-    let cur = -1;
-    const mark = () => {
-      const k = Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / track.clientWidth)));
-      if (k === cur) return;
-      cur = k;
-      slides.forEach((s, i) => s.classList.toggle('on', i === k));
-      if (cnt) cnt.textContent = two(k + 1) + ' / ' + two(slides.length);
+    const pin = stack.querySelector('.pin');
+    let cur = -1, timer = 0;
+    const pos = () => Math.min(N - 1, Math.max(0, (h.offsetHeight - stack.getBoundingClientRect().top) / pin.clientHeight));
+    const toSlide = k => window.scrollTo({ top: window.scrollY + stack.getBoundingClientRect().top - h.offsetHeight + k * pin.clientHeight, behavior: reduce ? 'auto' : 'smooth' });
+    stackApply = () => {
+      const t = pos();
+      slides.forEach((s, i) => {
+        s.style.setProperty('--r', (i === 0 ? 1 : Math.min(1, Math.max(0, t - (i - 1)))).toFixed(3));
+        s.style.setProperty('--c', (i === N - 1 ? 0 : Math.min(1, Math.max(0, t - i))).toFixed(3));
+      });
+      const k = Math.round(t);
+      if (k !== cur) {
+        cur = k;
+        slides.forEach((s, i) => s.classList.toggle('on', i === k));
+        dots.forEach((b, i) => b.classList.toggle('on', i === k));
+        if (cnt) cnt.textContent = two(k + 1) + ' / ' + two(N);
+      }
+      /* quando ci si ferma a metà, la foto più vicina si assesta da sola */
+      clearTimeout(timer);
+      if (!reduce) timer = setTimeout(() => {
+        const q = pos();
+        if (q > 0.02 && q < N - 1.02 && Math.abs(q - Math.round(q)) > 0.015) toSlide(Math.round(q));
+      }, 170);
     };
-    const go = k => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, k)) * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
-    track.addEventListener('scroll', () => requestAnimationFrame(mark), { passive: true });
-    d.querySelector('.s-prev').addEventListener('click', () => go(cur - 1));
-    d.querySelector('.s-next').addEventListener('click', () => go(cur + 1));
-    track.addEventListener('keydown', e => { if (e.key === 'ArrowRight') go(cur + 1); if (e.key === 'ArrowLeft') go(cur - 1); });
-    let down = false, sx = 0, sl = 0;
-    track.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = track.scrollLeft; track.classList.add('drag'); });
-    window.addEventListener('pointermove', e => { if (down) track.scrollLeft = sl - (e.clientX - sx); });
-    window.addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('drag'); go(Math.round(track.scrollLeft / track.clientWidth)); });
-    window.addEventListener('resize', () => go(cur));
-    mark();
+    dots.forEach((b, i) => b.addEventListener('click', () => toSlide(i)));
+    stackApply();
   }
 
   const v = d.querySelector('.hero video');
