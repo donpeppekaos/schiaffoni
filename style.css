@@ -329,3 +329,16 @@ button.btn{background:transparent;color:inherit;cursor:pointer}
 .mb.flip .mb-p{order:0}
 .mb-t{padding:2.5rem 1.5rem 3.5rem}
 }
+
+/* v13 titoli a dissolvenza veloce, foto più fluide */
+.js [data-split] .ch{animation:fadein .7s ease-out both;animation-delay:calc(var(--i)*9ms + .05s)}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.js .rw{transition:opacity .35s}
+.js .rv{transition-duration:.7s}
+.js .shot.rv{transition:clip-path .9s cubic-bezier(.65,0,.35,1)}
+.js .shot .m{transition:transform 1.2s cubic-bezier(.22,.61,.36,1)}
+.slide{clip-path:none;will-change:transform;contain:layout paint}
+.js .slide+.slide{transform:translate3d(0,100%,0)}
+.slide .shot .m{transform:none;transition:none}
+.slide .shot.rv{clip-path:none}
+.s-over{opacity:1;transform:none;will-change:opacity,transform}

@@ -48,6 +48,8 @@
     const row = { slot, src: c && c.src ? c.src : '', st: c ? (c.src ? 'in corso' : 'nessuna foto indicata') : 'spazio non presente in foto.js' };
     report.push(row);
     if (!c) return;
+    const st = el.querySelector('.s-t');
+    if (st && typeof c.title === 'string' && c.title) st.textContent = c.title;
     const cap = el.querySelector('.cap');
     if (cap) {
       const b = cap.querySelector('b'), s = cap.querySelector('span');
@@ -65,7 +67,8 @@
         m.setAttribute('playsinline', '');
       } else {
         m.alt = c.alt || c.title || '';
-        m.loading = 'lazy';
+        m.loading = el.classList.contains('slide') ? 'eager' : 'lazy';
+        if (el.classList.contains('slide')) m.fetchPriority = 'high';
         m.decoding = 'async';
       }
       if (c.pos) m.style.objectPosition = c.pos;
@@ -107,7 +110,9 @@
   if (reduce) rws.forEach(w => w.classList.add('on'));
 
   let stackApply = () => {};
+  let stackReadTop = () => {};
   const update = () => {
+    stackReadTop();
     const hh = h.offsetHeight, vh = window.innerHeight;
     h.classList.toggle('scrolled', window.scrollY > 40);
     let tone = 'light';
@@ -169,14 +174,23 @@
     const cnt = d.querySelector('.s-count'), dots = [...stack.querySelectorAll('.s-dots button')];
     const two = n => String(n).padStart(2, '0');
     const pin = stack.querySelector('.pin');
-    let cur = -1, timer = 0;
-    const pos = () => Math.min(N - 1, Math.max(0, (h.offsetHeight - stack.getBoundingClientRect().top) / pin.clientHeight));
+    let cur = -1;
+    let top0 = null;
+    const pos = () => Math.min(N - 1, Math.max(0, (h.offsetHeight - (top0 !== null ? top0 : stack.getBoundingClientRect().top)) / pin.clientHeight));
     const toSlide = k => window.scrollTo({ top: window.scrollY + stack.getBoundingClientRect().top - h.offsetHeight + k * pin.clientHeight, behavior: reduce ? 'auto' : 'smooth' });
+    const overs = slides.map(x => x.querySelector('.s-over'));
+    stackReadTop = () => { top0 = stack.getBoundingClientRect().top; };
     stackApply = () => {
       const t = pos();
-      slides.forEach((s, i) => {
-        s.style.setProperty('--r', (i === 0 ? 1 : Math.min(1, Math.max(0, t - (i - 1)))).toFixed(3));
-        s.style.setProperty('--c', (i === N - 1 ? 0 : Math.min(1, Math.max(0, t - i))).toFixed(3));
+      slides.forEach((sl, i) => {
+        const r = i === 0 ? 1 : Math.min(1, Math.max(0, t - (i - 1)));
+        const c = i === N - 1 ? 0 : Math.min(1, Math.max(0, t - i));
+        sl.style.transform = 'translate3d(0,' + ((1 - r) * 100 - c * 14).toFixed(2) + '%,0)';
+        const o = overs[i];
+        if (o) {
+          o.style.opacity = (Math.min(1, Math.max(0, (r - .45) * 2.2)) * (1 - c * 1.6 < 0 ? 0 : 1 - c * 1.6)).toFixed(3);
+          o.style.transform = 'translate3d(0,' + ((1 - r) * 40).toFixed(1) + 'px,0)';
+        }
       });
       const k = Math.round(t);
       if (k !== cur) {
@@ -185,12 +199,6 @@
         dots.forEach((b, i) => b.classList.toggle('on', i === k));
         if (cnt) cnt.textContent = two(k + 1) + ' / ' + two(N);
       }
-      /* quando ci si ferma a metà, la foto più vicina si assesta da sola */
-      clearTimeout(timer);
-      if (!reduce) timer = setTimeout(() => {
-        const q = pos();
-        if (q > 0.02 && q < N - 1.02 && Math.abs(q - Math.round(q)) > 0.015) toSlide(Math.round(q));
-      }, 170);
     };
     dots.forEach((b, i) => b.addEventListener('click', () => toSlide(i)));
     stackApply();
