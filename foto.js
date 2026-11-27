@@ -5,9 +5,9 @@
    4. "pos" sposta il taglio della foto: "center", "top", "bottom", "left", "right".
    Consiglio: .jpg o .webp, larghezza 1800px, sotto i 400 KB. */
 window.FOTO = {
-  "home-1": {"src": "", "title": "La pasta", "text": "Sfoglie tirate a mano, ogni giorno.", "alt": "", "pos": "center"},
-  "home-2": {"src": "", "title": "La sala", "text": "Uno spazio pensato per chi si siede.", "alt": "", "pos": "center"},
-  "home-3": {"src": "", "title": "La materia", "text": "Pochi ingredienti, scelti con cura.", "alt": "", "pos": "center"},
+  "home-1": {"src": "piatto.jpg", "text": "Sfoglie tirate a mano, ogni giorno.", "alt": "", "pos": "center"},
+  "home-2": {"src": "tavola.jpg", "text": "Uno spazio pensato per chi si siede.", "alt": "", "pos": "center"},
+  "home-3": {"src": "tonno.jpg",  "text": "Pochi ingredienti, scelti con cura.", "alt": "", "pos": "center"},
   "home-4": {"src": "", "title": "I dettagli", "text": "Ogni dettaglio è studiato.", "alt": "", "pos": "center"},
   "menu-1": {"src": "", "title": "L’apertura", "text": "Un solo ingrediente, raccontato in più modi.", "alt": "", "pos": "center"},
   "menu-2": {"src": "", "title": "La pasta", "text": "Sfoglie tirate a mano, ogni giorno.", "alt": "", "pos": "center"},
