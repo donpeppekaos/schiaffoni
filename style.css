@@ -381,3 +381,12 @@ button.btn{background:transparent;color:inherit;cursor:pointer}
 .hero [data-split] .ln+.ln{letter-spacing:0}
 @media (prefers-reduced-motion:reduce){.js .hero [data-split] .ln{animation:none}}
 .hero h1{font-size:clamp(3rem,8vw,6.2rem)}
+
+/* v19 una sola dissolvenza semplice (solo opacità: leggerissima per il browser) */
+.js [data-split] .ch,.js .hero [data-split] .ch,.js .hero [data-split] .ln{animation:none!important;transform:none!important;letter-spacing:inherit}
+.js [data-split] .wd{transform:none!important;will-change:auto;overflow:visible;padding:0;margin:0}
+.js [data-split]{animation:titlefade 1.3s ease-out .15s backwards;animation-play-state:paused;transform:translate3d(0,calc(var(--p,0)*-40px),0)}
+.js.go [data-split]{animation-play-state:running}
+@keyframes titlefade{from{opacity:0}to{opacity:1}}
+.hero [data-split] .ln+.ln{letter-spacing:0}
+@media (prefers-reduced-motion:reduce){.js [data-split]{animation:none}}
