@@ -195,33 +195,56 @@ button.btn{background:transparent;color:inherit;cursor:pointer}
 .sm{font-size:.85rem;opacity:.75}
 @media (max-width:760px){.form .row{grid-template-columns:1fr}}
 
-/* ---- v8: luxury, rosa, slide ---- */
-:root{--rose:#e9cbc4;--rose-soft:#f4e4e0}
+/* ---- v9: verde caldo con onde, foto impilate, rosa ---- */
+:root{--rose:#e9cbc4;--rose-soft:#f4e4e0;--ivory2:#f4ebe0;--line:#e2d6c8}
 ::selection{background:var(--rose);color:var(--green)}
 .rs{background:var(--rose);color:var(--green)}
+.dk{background:radial-gradient(ellipse at 88% 0%,rgba(233,203,196,.16),transparent 55%),var(--green)}
 .dk .eyebrow{color:var(--rose);opacity:1}
+.btn.solid:hover{background:var(--rose);border-color:var(--rose);color:var(--green)}
+.dk .btn:hover,.dk .btn.solid:hover{background:var(--rose);border-color:var(--rose);color:var(--green)}
+#main-nav a.cta:hover{background:var(--rose);border-color:var(--rose);color:var(--green)}
 .chapter{transition:padding-left .8s,background-color .8s}
 .chapter:hover{background:var(--rose-soft)}
 .dk .contacts li{border-color:rgba(250,249,246,.25)}
 .dk .contacts a{border-color:rgba(250,249,246,.35)}
-.slides{position:relative;padding:0}
-.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab}
-.track::-webkit-scrollbar{display:none}
-.track.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
-.track:focus-visible{outline:2px solid var(--green);outline-offset:-4px}
-.slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;display:grid;grid-template-columns:62fr 38fr;min-height:100vh;min-height:100svh}
-.slide .shot{border:0;height:100%;min-height:100%}
-.slide .shot .m{transform:scale(1.12);transition:transform 2.6s cubic-bezier(.22,.61,.36,1)}
-.slide.on .shot .m{transform:none}
-.s-panel{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:1.6rem;padding:calc(var(--hh) + 2rem) clamp(1.8rem,5vw,5rem) 6rem}
+
+/* Home: il verde caldo con le onde del video in trasparenza */
+.hero{background:var(--green);color:var(--ivory)}
+.hero video{filter:grayscale(100%) contrast(1.15) brightness(1.15)}
+.hero::after{background:radial-gradient(ellipse at 50% 115%,rgba(233,203,196,.28),transparent 62%),linear-gradient(rgba(29,86,52,.8),rgba(29,86,52,.88))}
+.hero h1{color:var(--ivory)}
+
+/* onde sottili in trasparenza sulle sezioni verdi */
+.ph,.ct{position:relative;overflow:hidden;isolation:isolate}
+.ph::before,.ct::before{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;background:url(assets/waves.svg) repeat-x 0 100%/1200px 200px;z-index:-1;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.ph::before,.ct::before{animation:wv 90s linear infinite}}
+@keyframes wv{to{background-position-x:1200px}}
+
+/* foto impilate: la sezione resta ferma, scorrendo cambiano; finite, la pagina riprende */
+.stack{height:calc(4 * (100vh - var(--hh)));height:calc(4 * (100svh - var(--hh)));padding:0}
+.pin{position:sticky;top:var(--hh);height:calc(100vh - var(--hh));height:calc(100svh - var(--hh));overflow:hidden}
+.slide{--r:1;--c:0;position:absolute;inset:0;display:grid;grid-template-columns:62fr 38fr;clip-path:inset(calc((1 - var(--r)) * 100%) 0 0 0)}
+.js .slide+.slide{--r:0}
+.slide:nth-child(1){z-index:1}.slide:nth-child(2){z-index:2}.slide:nth-child(3){z-index:3}.slide:nth-child(4){z-index:4}
+.slide .shot{border:0;height:100%}
+.slide .shot::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(29,86,52,.4),transparent 48%);pointer-events:none}
+.slide .shot .m{transform:scale(calc(1.14 - var(--r) * .14));transition:none}
+.s-panel{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:1.6rem;padding:2.5rem clamp(1.8rem,5vw,5rem) 6rem}
 .slide.iv .s-panel{background:var(--ivory)}
 .slide.rs .s-panel{background:var(--rose)}
+.s-panel>*{opacity:calc(clamp(0,(var(--r) - .35) * 1.8,1) * (1 - var(--c) * 1.4));transform:translateY(calc((1 - var(--r)) * 44px - var(--c) * 30px))}
+.ghost{position:absolute;right:clamp(1rem,3vw,2.5rem);top:1.2rem;font:400 clamp(5rem,12vw,10rem)/1 var(--didot);pointer-events:none}
+.slide.iv .ghost{color:var(--rose)}
+.slide.rs .ghost{color:var(--rose-soft)}
 .slide .cap{max-width:30ch;font-size:1rem}
 .slide .cap b{font:400 clamp(2.2rem,4.4vw,4rem)/1.05 var(--didot);letter-spacing:-.01em;text-transform:none;opacity:1;margin-bottom:1rem}
-.s-panel .btn{margin-top:1rem}
-.s-ctrl{position:absolute;right:clamp(1.8rem,5vw,5rem);bottom:2.2rem;display:flex;align-items:center;gap:1.2rem;font:500 .72rem var(--avenir);letter-spacing:.2em;color:var(--green);z-index:2}
-.s-ctrl button{width:44px;height:44px;border:1px solid var(--green);background:transparent;color:inherit;font-size:1.1rem;cursor:pointer;transition:background .4s,color .4s}
-.s-ctrl button:hover{background:var(--green);color:var(--ivory)}
+.s-ctrl{position:absolute;right:clamp(1.8rem,5vw,5rem);bottom:2rem;z-index:10;display:flex;align-items:center;gap:1.2rem;font:500 .72rem var(--avenir);letter-spacing:.2em;color:var(--green)}
+.s-dots{display:flex;gap:.4rem}
+.s-dots button{width:28px;height:18px;border:0;padding:0;cursor:pointer;background:linear-gradient(var(--green),var(--green)) center/100% 2px no-repeat;opacity:.3;transition:opacity .5s,width .5s}
+.s-dots button.on{opacity:1;width:44px}
+
+.idx{background:var(--ivory2)}
 .idx h2{margin-bottom:2.2rem}
 .idx .row{display:grid;grid-template-columns:4rem 1fr 1.3fr auto;gap:1.5rem;align-items:baseline;padding:2rem 0;border-top:1px solid var(--line);text-decoration:none;transition:background-color .8s,padding .8s}
 .idx .row:last-child{border-bottom:1px solid var(--line)}
@@ -234,14 +257,19 @@ button.btn{background:transparent;color:inherit;cursor:pointer}
 .fdbg{position:fixed;left:1rem;bottom:1rem;z-index:99;background:#fff;color:#000;font:12px/1.45 ui-monospace,Menlo,monospace;padding:.8rem 1rem;max-width:min(92vw,520px);max-height:60vh;overflow:auto;border:2px solid #c00}
 .fdbg p{margin:0 0 .4rem}
 @media (max-width:760px){
-.slide{grid-template-columns:1fr;grid-template-rows:58vh auto;grid-template-rows:58svh auto}
-.s-panel{padding:2.2rem 1.5rem 6.5rem;justify-content:flex-start}
+.slide{grid-template-columns:1fr;grid-template-rows:46vh 1fr;grid-template-rows:46svh 1fr}
+.s-panel{padding:1.8rem 1.5rem 5rem;justify-content:flex-start;gap:1rem}
+.ghost{top:.4rem;font-size:4.5rem}
 .s-ctrl{left:1.5rem;right:1.5rem;justify-content:space-between}
 .idx .row{grid-template-columns:3rem 1fr auto;gap:.6rem 1rem}
 .idx .row .d{grid-column:2/-1}}
-/* v8b: la slide occupa esattamente lo schermo sotto la barra */
-.slide{min-height:calc(100vh - var(--hh));min-height:calc(100svh - var(--hh))}
-.s-panel{padding-top:2.5rem}
-@media (max-width:760px){
-.slide{grid-template-rows:52vh auto;grid-template-rows:52svh auto}
-.s-panel{padding:2rem 1.5rem 5.5rem}}
+
+/* v9b hero più verde e caldo, con onde */
+.hero video{filter:grayscale(100%) contrast(1.25) brightness(.95);mix-blend-mode:screen;opacity:.55}
+.hero{background:#1d5634}
+.hero::after{background:radial-gradient(ellipse at 50% 120%,rgba(233,203,196,.30),transparent 60%),linear-gradient(rgba(29,86,52,.55),rgba(24,70,43,.7))}
+.hero::before{content:"";position:absolute;left:-5%;right:-5%;bottom:0;height:46%;background:url(assets/waves.svg) center bottom/cover no-repeat;opacity:.55;z-index:-1;animation:wv 18s ease-in-out infinite alternate}
+@keyframes wv{to{transform:translateX(-3%) translateY(-2%)}}
+@media (prefers-reduced-motion:reduce){.hero::before{animation:none}}
+.hero video{mix-blend-mode:normal;opacity:.22}
+.hero::before{opacity:.8;height:55%}
