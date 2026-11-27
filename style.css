@@ -382,11 +382,12 @@ button.btn{background:transparent;color:inherit;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.js .hero [data-split] .ln{animation:none}}
 .hero h1{font-size:clamp(3rem,8vw,6.2rem)}
 
-/* v19 una sola dissolvenza semplice (solo opacità: leggerissima per il browser) */
-.js [data-split] .ch,.js .hero [data-split] .ch,.js .hero [data-split] .ln{animation:none!important;transform:none!important;letter-spacing:inherit}
-.js [data-split] .wd{transform:none!important;will-change:auto;overflow:visible;padding:0;margin:0}
-.js [data-split]{animation:titlefade 1.3s ease-out .15s backwards;animation-play-state:paused;transform:translate3d(0,calc(var(--p,0)*-40px),0)}
-.js.go [data-split]{animation-play-state:running}
-@keyframes titlefade{from{opacity:0}to{opacity:1}}
+/* v20 parola per parola dal basso: leggero (anima solo le parole), parte subito */
+.js [data-split] .ch,.js .hero [data-split] .ch,.js .hero [data-split] .ln{animation:none;transform:none;letter-spacing:inherit}
+.js [data-split]{transform:translate3d(0,calc(var(--p,0)*-40px),0)}
+.ln{display:block;overflow:hidden;padding:.1em 0 .25em;margin:-.1em 0 -.25em}
+.js [data-split] .wd{display:inline-block;overflow:visible;padding:0;margin:0;vertical-align:top;transform:none;will-change:transform,opacity;animation:wordup .8s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--w,0)*.11s + var(--ln,0)*.2s + .05s);animation-play-state:paused}
+.js.go [data-split] .wd{animation-play-state:running}
+@keyframes wordup{from{opacity:0;transform:translate3d(0,85%,0)}to{opacity:1;transform:none}}
 .hero [data-split] .ln+.ln{letter-spacing:0}
-@media (prefers-reduced-motion:reduce){.js [data-split]{animation:none}}
+@media (prefers-reduced-motion:reduce){.js [data-split] .wd{animation:none}}

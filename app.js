@@ -37,9 +37,9 @@
   });
   /* l'animazione parte solo a pagina pronta, così non si consuma mentre il sito si carica */
   let went = false;
-  const go = () => { if (went) return; went = true; setTimeout(() => d.documentElement.classList.add('go'), 250); };
-  if (d.readyState === 'complete') go(); else window.addEventListener('load', go);
-  setTimeout(go, 1800);
+  const go = () => { if (went) return; went = true; setTimeout(() => d.documentElement.classList.add('go'), 60); };
+  if (d.readyState !== 'loading') go(); else d.addEventListener('DOMContentLoaded', go);
+  setTimeout(go, 500);
 
   /* frase che si accende parola per parola */
   d.querySelectorAll('[data-words]').forEach(el => {
