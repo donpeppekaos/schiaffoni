@@ -4,27 +4,42 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   d.documentElement.classList.add('js');
 
-  /* titoli animati lettera per lettera */
+  /* titoli animati parola per parola; "|" separa due tempi (righe) del titolo */
   d.querySelectorAll('[data-split]').forEach(el => {
-    const txt = el.textContent.trim();
-    el.setAttribute('aria-label', txt);
+    const raw = el.textContent.trim();
+    el.setAttribute('aria-label', raw.replace(/\s*\|\s*/g, ' '));
     el.textContent = '';
-    let i = 0;
-    txt.split(' ').forEach((word, wi, arr) => {
-      const wd = d.createElement('span');
-      wd.className = 'wd';
-      wd.setAttribute('aria-hidden', 'true');
-      [...word].forEach(c => {
-        const s = d.createElement('span');
-        s.className = 'ch';
-        s.textContent = c;
-        s.style.setProperty('--i', i++);
-        wd.appendChild(s);
+    let wi = 0;
+    raw.split('|').forEach((line, li) => {
+      const ln = d.createElement('span');
+      ln.className = 'ln';
+      ln.setAttribute('aria-hidden', 'true');
+      line.trim().split(' ').forEach((word, k, arr) => {
+        const wd = d.createElement('span');
+        wd.className = 'wd';
+        wd.style.setProperty('--w', wi);
+        wd.style.setProperty('--ln', li);
+        wd.style.setProperty('--k', 28 + wi * 16);
+        [...word].forEach(c => {
+          const s = d.createElement('span');
+          s.className = 'ch';
+          s.style.setProperty('--w', wi);
+          s.style.setProperty('--ln', li);
+          s.textContent = c;
+          wd.appendChild(s);
+        });
+        wi++;
+        ln.appendChild(wd);
+        if (k < arr.length - 1) ln.appendChild(d.createTextNode(' '));
       });
-      el.appendChild(wd);
-      if (wi < arr.length - 1) el.appendChild(d.createTextNode(' '));
+      el.appendChild(ln);
     });
   });
+  /* l'animazione parte solo a pagina pronta, così non si consuma mentre il sito si carica */
+  let went = false;
+  const go = () => { if (went) return; went = true; setTimeout(() => d.documentElement.classList.add('go'), 250); };
+  if (d.readyState === 'complete') go(); else window.addEventListener('load', go);
+  setTimeout(go, 1800);
 
   /* frase che si accende parola per parola */
   d.querySelectorAll('[data-words]').forEach(el => {
@@ -104,6 +119,7 @@
   const h = d.querySelector('.site-header'), t = d.querySelector('.nav-toggle'), n = d.getElementById('main-nav');
   const secs = [...d.querySelectorAll('main > section, footer')];
   const hero = d.querySelector('.hero');
+  const phs = d.querySelector('.ph');
   const fades = [...d.querySelectorAll('.hero h1, .ph h1, .ph .lead')];
   const st = d.querySelector('[data-words]');
   const rws = [...d.querySelectorAll('.rw')];
@@ -122,6 +138,7 @@
     }
     if (d.body.dataset.tone !== tone) d.body.dataset.tone = tone;
     if (hero && !reduce) hero.style.setProperty('--p', Math.min(window.scrollY / vh, 1).toFixed(3));
+    if (phs && !reduce) phs.style.setProperty('--p', Math.min(window.scrollY / Math.max(phs.offsetHeight, 1), 1).toFixed(3));
     /* i titoli restano pieni finché si leggono: sfumano solo quando stanno uscendo sotto la barra */
     fades.forEach(el => {
       const r = el.getBoundingClientRect();
