@@ -39,10 +39,14 @@
     });
   });
 
-  /* foto e didascalie: si gestiscono tutte da foto.js */
+  /* foto e didascalie: si gestiscono tutte da foto.js (con ?fotodebug in fondo all'indirizzo si vede cosa non va) */
   const F = window.FOTO || {};
+  const report = [];
+  let render = () => {};
   d.querySelectorAll('[data-slot]').forEach(el => {
-    const c = F[el.dataset.slot];
+    const slot = el.dataset.slot, c = F[slot];
+    const row = { slot, src: c && c.src ? c.src : '', st: c ? (c.src ? 'in corso' : 'nessuna foto indicata') : 'spazio non presente in foto.js' };
+    report.push(row);
     if (!c) return;
     const cap = el.querySelector('.cap');
     if (cap) {
@@ -65,13 +69,34 @@
         m.decoding = 'async';
       }
       if (c.pos) m.style.objectPosition = c.pos;
-      m.addEventListener('error', () => { m.remove(); host.classList.remove('has-art'); });
+      m.addEventListener('error', () => { row.st = 'NON TROVATA'; m.remove(); host.classList.remove('has-art'); render(); });
+      m.addEventListener(isV ? 'loadeddata' : 'load', () => { row.st = 'OK'; render(); });
       m.src = 'assets/img/' + c.src;
       host.appendChild(m);
       host.classList.add('has-art');
       if (isV) { const p = m.play(); if (p && p.catch) p.catch(() => {}); }
     }
   });
+  if (new URLSearchParams(window.location.search).has('fotodebug')) {
+    const p = d.createElement('div');
+    p.className = 'fdbg';
+    d.body.appendChild(p);
+    render = () => {
+      p.textContent = '';
+      const add = (t, bold) => { const e = d.createElement('p'); e.textContent = t; if (bold) e.style.fontWeight = '700'; p.appendChild(e); };
+      add(window.FOTO ? 'foto.js letto correttamente (' + Object.keys(F).length + ' spazi).' : 'ERRORE: foto.js non letto. Di solito c’è un errore di scrittura (virgolette “ ” al posto di " ", una virgola mancante) oppure il file non è stato caricato.', true);
+      report.forEach(r => {
+        let t = r.slot + ': ' + r.st;
+        if (r.st === 'NON TROVATA') {
+          t += ' — assets/img/' + r.src + '. ' + (/\.(heic|heif)$/i.test(r.src)
+            ? 'Il formato HEIC (iPhone) non si legge sul web: convertila in .jpg.'
+            : 'Controlla che il file sia nella cartella assets/img/ e che nome e maiuscole/minuscole siano identici.');
+        }
+        add(t);
+      });
+    };
+    render();
+  }
 
   const h = d.querySelector('.site-header'), t = d.querySelector('.nav-toggle'), n = d.getElementById('main-nav');
   const secs = [...d.querySelectorAll('main > section, footer')];
@@ -134,6 +159,32 @@
     }), { threshold: 0.15 });
     watch.forEach((_, k) => io.observe(k));
   } else els.forEach(e => e.classList.add('in'));
+
+  /* slide scorrevoli: dito, trackpad, mouse (trascinando) e frecce */
+  const track = d.querySelector('.track');
+  if (track) {
+    const slides = [...track.children], cnt = d.querySelector('.s-count');
+    const two = n => String(n).padStart(2, '0');
+    let cur = -1;
+    const mark = () => {
+      const k = Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / track.clientWidth)));
+      if (k === cur) return;
+      cur = k;
+      slides.forEach((s, i) => s.classList.toggle('on', i === k));
+      if (cnt) cnt.textContent = two(k + 1) + ' / ' + two(slides.length);
+    };
+    const go = k => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, k)) * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+    track.addEventListener('scroll', () => requestAnimationFrame(mark), { passive: true });
+    d.querySelector('.s-prev').addEventListener('click', () => go(cur - 1));
+    d.querySelector('.s-next').addEventListener('click', () => go(cur + 1));
+    track.addEventListener('keydown', e => { if (e.key === 'ArrowRight') go(cur + 1); if (e.key === 'ArrowLeft') go(cur - 1); });
+    let down = false, sx = 0, sl = 0;
+    track.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = track.scrollLeft; track.classList.add('drag'); });
+    window.addEventListener('pointermove', e => { if (down) track.scrollLeft = sl - (e.clientX - sx); });
+    window.addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('drag'); go(Math.round(track.scrollLeft / track.clientWidth)); });
+    window.addEventListener('resize', () => go(cur));
+    mark();
+  }
 
   const v = d.querySelector('.hero video');
   if (v) { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
