@@ -10,10 +10,10 @@ window.FOTO = {
   "home-3": {"src": "tonno.jpg",  "text": "Pochi ingredienti, scelti con cura.", "alt": "", "pos": "center"},
   "home-4": {"src": "dettaglio.jpg", "title": "I dettagli", "text": "Ogni dettaglio è studiato.", "alt": "", "pos": "center"},
   
-  "menu-1": {"src": "", "title": "L’apertura", "text": "Un solo ingrediente, raccontato in più modi.", "alt": "", "pos": "center"},
-  "menu-2": {"src": "", "title": "La pasta", "text": "Sfoglie tirate a mano, ogni giorno.", "alt": "", "pos": "center"},
-  "menu-3": {"src": "", "title": "Il dolce", "text": "Pochi elementi, temperature e consistenze.", "alt": "", "pos": "center"},
-  "menu-4": {"src": "", "title": "I vini", "text": "Una carta essenziale, in dialogo con la cucina.", "alt": "", "pos": "center"},
+  "menu-1": {"src": "crudi.jpg", "title": "L’apertura", "text": "Un solo ingrediente, raccontato in più modi.", "alt": "", "pos": "center"},
+  "menu-2": {"src": "antipasti.jpg", "title": "La pasta", "text": "Sfoglie tirate a mano, ogni giorno.", "alt": "", "pos": "center"},
+  "menu-3": {"src": "pasta.jpg", "title": "Il dolce", "text": "Pochi elementi, temperature e consistenze.", "alt": "", "pos": "center"},
+  "menu-4": {"src": "secondi.jpg", "title": "I vini", "text": "Una carta essenziale, in dialogo con la cucina.", "alt": "", "pos": "center"},
   
   "contatti-1": {"src": "", "title": "L’ingresso", "text": "Via Manzoni, 146.", "alt": "", "pos": "center"},
   "contatti-2": {"src": "", "title": "La sala", "text": "Uno spazio pensato per chi si siede.", "alt": "", "pos": "center"},
