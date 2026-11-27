@@ -8,7 +8,7 @@ window.FOTO = {
   "home-1": {"src": "piatto.jpg", "text": "Sfoglie tirate a mano, ogni giorno.", "alt": "", "pos": "center"},
   "home-2": {"src": "tavola.jpg", "text": "Uno spazio pensato per chi si siede.", "alt": "", "pos": "center"},
   "home-3": {"src": "tonno.jpg",  "text": "Pochi ingredienti, scelti con cura.", "alt": "", "pos": "center"},
-  "home-4": {"src": "", "title": "I dettagli", "text": "Ogni dettaglio è studiato.", "alt": "", "pos": "center"},
+  "home-4": {"src": "dettaglio.jpg", "title": "I dettagli", "text": "Ogni dettaglio è studiato.", "alt": "", "pos": "center"},
   "menu-1": {"src": "", "title": "L’apertura", "text": "Un solo ingrediente, raccontato in più modi.", "alt": "", "pos": "center"},
   "menu-2": {"src": "", "title": "La pasta", "text": "Sfoglie tirate a mano, ogni giorno.", "alt": "", "pos": "center"},
   "menu-3": {"src": "", "title": "Il dolce", "text": "Pochi elementi, temperature e consistenze.", "alt": "", "pos": "center"},
